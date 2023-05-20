@@ -2,9 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalculatorDef.MVVM.Views.CalculatorView"
-             Title="Calculadora">
+             Title="Calculadora by Jefferson">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ButtonBackgroundColor">#4CAF50</Color>
+            <Color x:Key="ButtonTextColor">#FFFFFF</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="10">
-        <Label Text="0" FontSize="30" TextColor="#333333" HorizontalOptions="CenterAndExpand" />
+        <Label Text="{Binding CurrentNumber}" FontSize="30" TextColor="#333333" HorizontalOptions="CenterAndExpand" />
 
         <Grid Margin="10">
             <Grid.RowDefinitions>
@@ -21,33 +27,33 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Text="1" FontSize="24" />
-            <Button Grid.Row="0" Grid.Column="1" Text="2" FontSize="24" />
-            <Button Grid.Row="0" Grid.Column="2" Text="3" FontSize="24" />
-            <Button Grid.Row="0" Grid.Column="3" Text="+" FontSize="24" BackgroundColor="#FF9800" />
+            <Button Grid.Row="0" Grid.Column="0" Text="1" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="1" HeightRequest="80" WidthRequest="80"/>
+            <Button Grid.Row="0" Grid.Column="1" Text="2" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="2" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="0" Grid.Column="2" Text="3" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="3" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="0" Grid.Column="3" Text="+" FontSize="30" BackgroundColor="#FF9800" TextColor="{StaticResource ButtonTextColor}" Command="{Binding OperationCommand}" CommandParameter="+" HeightRequest="80" WidthRequest="80" />
 
             <!-- Repite los botones para los números 4 al 9 y las operaciones restantes -->
 
-            <Button Grid.Row="1" Grid.Column="0" Text="4" FontSize="24" />
-            <Button Grid.Row="1" Grid.Column="1" Text="5" FontSize="24" />
-            <Button Grid.Row="1" Grid.Column="2" Text="6" FontSize="24" />
-            <Button Grid.Row="1" Grid.Column="3" Text="-" FontSize="24" BackgroundColor="#FF9800" />
+            <Button Grid.Row="1" Grid.Column="0" Text="4" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="4" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="1" Grid.Column="1" Text="5" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="5" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="1" Grid.Column="2" Text="6" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="6" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="1" Grid.Column="3" Text="-" FontSize="30" BackgroundColor="#FF9800" TextColor="{StaticResource ButtonTextColor}" Command="{Binding OperationCommand}" CommandParameter="-" HeightRequest="80" WidthRequest="80" />
 
             <!-- Botones para los números 7, 8 y 9 -->
 
-            <Button Grid.Row="2" Grid.Column="0" Text="7" FontSize="24" />
-            <Button Grid.Row="2" Grid.Column="1" Text="8" FontSize="24" />
-            <Button Grid.Row="2" Grid.Column="2" Text="9" FontSize="24" />
-            <Button Grid.Row="2" Grid.Column="3" Text="*" FontSize="24" BackgroundColor="#FF9800" />
+            <Button Grid.Row="2" Grid.Column="0" Text="7" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="7" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="2" Grid.Column="1" Text="8" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="8" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="2" Grid.Column="2" Text="9" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="9" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="2" Grid.Column="3" Text="*" FontSize="30" BackgroundColor="#FF9800" TextColor="{StaticResource ButtonTextColor}" Command="{Binding OperationCommand}" CommandParameter="*" HeightRequest="80" WidthRequest="80" />
 
             <!-- Botones para el número 0 y la operación de división -->
 
-            <Button Grid.Row="3" Grid.Column="0" Text="0" FontSize="24" />
-            <Button Grid.Row="3" Grid.Column="1" Text="." FontSize="24" />
-            <Button Grid.Row="3" Grid.Column="2" Text="=" FontSize="24" BackgroundColor="#FF9800" />
-            <Button Grid.Row="3" Grid.Column="3" Text="/" FontSize="24" BackgroundColor="#FF9800" />
+            <Button Grid.Row="3" Grid.Column="0" Text="0" FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="0" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="3" Grid.Column="1" Text="." FontSize="30" BackgroundColor="{StaticResource ButtonBackgroundColor}" TextColor="{StaticResource ButtonTextColor}" Command="{Binding NumberCommand}" CommandParameter="." HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="3" Grid.Column="2" Text="=" FontSize="30" BackgroundColor="#FF9800" TextColor="{StaticResource ButtonTextColor}" Command="{Binding CalculateCommand}" HeightRequest="80" WidthRequest="80" />
+            <Button Grid.Row="3" Grid.Column="3" Text="/" FontSize="30" BackgroundColor="#FF9800" TextColor="{StaticResource ButtonTextColor}" Command="{Binding OperationCommand}" CommandParameter="/" HeightRequest="80" WidthRequest="80" />
         </Grid>
-        <Button Text="Limpiar" FontSize="24" BackgroundColor="#F44336" TextColor="White" HorizontalOptions="Center" WidthRequest="200" HeightRequest="60" CornerRadius="10" />
+        <Button Text="Limpiar" FontSize="24" BackgroundColor="#F44336" TextColor="{StaticResource ButtonTextColor}" Command="{Binding ClearCommand}" HorizontalOptions="Center" WidthRequest="200" HeightRequest="60" CornerRadius="10" />
 
     </StackLayout>
 </ContentPage>
