@@ -34,8 +34,8 @@ namespace CalculatorDef.ViewModels
 
         private void AppendNumber(string number)
         {
+            UpdateHistory($"{number}");
             CurrentNumber += number;
-            UpdateHistory($"{CurrentNumber}");
         }
 
         private void SetOperator(string operation)
