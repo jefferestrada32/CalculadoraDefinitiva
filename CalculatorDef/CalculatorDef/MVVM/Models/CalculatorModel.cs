@@ -24,6 +24,7 @@
                         result = operand1 / operand2;
                     else
                         throw new DivideByZeroException("Error: No es posible dividir por 0");
+                    // TODO: Debo de sacar un mensaje por pantalla cuando salga un error
                     break;
                 default:
                     throw new ArgumentException("Operacion invalida");
