@@ -14,6 +14,7 @@ namespace CalculatorDef.ViewModels
         private CalculatorModel _calculatorModel;
 
         public string CurrentNumber { get; set; }
+        public string ErrorMessage { get;  set; }
         public ICommand NumberCommand { get; private set; }
         public ICommand OperationCommand { get; private set; }
         public ICommand CalculateCommand { get; private set; }
@@ -43,8 +44,17 @@ namespace CalculatorDef.ViewModels
         private void CalculateResult()
         {
             double currentNumber = Convert.ToDouble(CurrentNumber);
-            double result = _calculatorModel.PerformOperation(_previousNumber, currentNumber, _selectedOperator);
-            CurrentNumber = result.ToString();
+
+            try
+            {
+                double result = _calculatorModel.PerformOperation(_previousNumber, currentNumber, _selectedOperator);
+                CurrentNumber = result.ToString();
+                ErrorMessage = string.Empty; // Restablecer el mensaje de error
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
 
         private void Clear()

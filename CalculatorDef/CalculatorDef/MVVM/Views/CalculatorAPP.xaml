@@ -11,6 +11,7 @@
     </ContentPage.Resources>
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="10">
         <Label Text="{Binding CurrentNumber}" FontSize="30" TextColor="#333333" HorizontalOptions="CenterAndExpand" />
+        <Label Text="{Binding ErrorMessage}" FontSize="16" TextColor="Red" HorizontalOptions="CenterAndExpand" />
 
         <Grid Margin="10">
             <Grid.RowDefinitions>
