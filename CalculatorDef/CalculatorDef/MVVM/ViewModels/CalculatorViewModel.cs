@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Input;
 using CalculatorDef.Models;
 using PropertyChanged;
@@ -14,7 +15,8 @@ namespace CalculatorDef.ViewModels
         private CalculatorModel _calculatorModel;
 
         public string CurrentNumber { get; set; }
-        public string ErrorMessage { get;  set; }
+        public string ErrorMessage { get; set; }
+        public string History { get; set; }
         public ICommand NumberCommand { get; private set; }
         public ICommand OperationCommand { get; private set; }
         public ICommand CalculateCommand { get; private set; }
@@ -27,11 +29,13 @@ namespace CalculatorDef.ViewModels
             OperationCommand = new Command<string>(SetOperator);
             CalculateCommand = new Command(CalculateResult);
             ClearCommand = new Command(Clear);
+            History = string.Empty;
         }
 
-        private void AppendNumber(string number) // con este metodo concateno los numeros bindados :)
+        private void AppendNumber(string number)
         {
             CurrentNumber += number;
+            UpdateHistory($"{CurrentNumber}");
         }
 
         private void SetOperator(string operation)
@@ -39,6 +43,8 @@ namespace CalculatorDef.ViewModels
             _previousNumber = Convert.ToDouble(CurrentNumber);
             _selectedOperator = operation;
             CurrentNumber = string.Empty;
+            //UpdateHistory($"{_previousNumber} {_selectedOperator} ");
+            UpdateHistory($"{_selectedOperator}");
         }
 
         private void CalculateResult()
@@ -49,7 +55,8 @@ namespace CalculatorDef.ViewModels
             {
                 double result = _calculatorModel.PerformOperation(_previousNumber, currentNumber, _selectedOperator);
                 CurrentNumber = result.ToString();
-                ErrorMessage = string.Empty; // Restablecer el mensaje de error
+                ErrorMessage = string.Empty;
+                //UpdateHistory($"{_previousNumber} {_selectedOperator} {currentNumber}");
             }
             catch (Exception ex)
             {
@@ -60,8 +67,15 @@ namespace CalculatorDef.ViewModels
         private void Clear()
         {
             CurrentNumber = string.Empty;
+            ErrorMessage = string.Empty;
+            History = string.Empty;
             _previousNumber = 0;
             _selectedOperator = null;
+        }
+
+        private void UpdateHistory(string entry)
+        {
+            History += entry;
         }
     }
 }
